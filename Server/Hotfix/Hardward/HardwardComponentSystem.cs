@@ -18,7 +18,7 @@ namespace ET
             Console.WriteLine("硬件初始化完成");
             self.m_Computer = self.NormalSetting();
             self.m_Computer.Open();
-            MessageHelper.SendActor()
+            //MessageHelper.SendActor()
 
         }
     }
