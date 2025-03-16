@@ -4,13 +4,14 @@ namespace ET
     {
         public static Scene CreateZoneScene(int zone, string name, Entity parent)
         {
+            Log.Debug("创建zoneScene时创建了各种组件");
             Scene zoneScene = EntitySceneFactory.CreateScene(Game.IdGenerater.GenerateInstanceId(), zone, SceneType.Zone, name, parent);
             zoneScene.AddComponent<ZoneSceneFlagComponent>();
             zoneScene.AddComponent<NetKcpComponent, int>(SessionStreamDispatcherType.SessionStreamDispatcherClientOuter);
-			zoneScene.AddComponent<CurrentScenesComponent>();
-            zoneScene.AddComponent<ObjectWait>();
-            zoneScene.AddComponent<PlayerComponent>();
-            
+            Log.Debug("创建HardwareComponen组件");
+            zoneScene.AddComponent<HardwareComponent>();
+			//zoneScene.AddComponent<CurrentScenesComponent>();
+            //给unity耦合层发送的消息
             Game.EventSystem.Publish(new EventType.AfterCreateZoneScene() {ZoneScene = zoneScene});
             return zoneScene;
         }

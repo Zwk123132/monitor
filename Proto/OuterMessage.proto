@@ -1,6 +1,12 @@
 syntax = "proto3";
 package ET;
 
+message M2C_FPSChange // IActorMessage
+{
+	int32 nNewFPS = 1;
+}
+
+
 //ResponseType M2C_TestResponse
 message C2M_TestRequest // IActorLocationRequest
 {

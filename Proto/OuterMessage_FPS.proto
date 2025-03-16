@@ -1,0 +1,8 @@
+syntax = "proto3";
+package ET;
+
+message M2C_FPSChange // IActorMessage
+{
+	int32 nNewFPS = 1;
+}
+

@@ -53,6 +53,7 @@ namespace ET
         [ObjectSystem]
         public class TimerComponentAwakeSystem: AwakeSystem<TimerComponent>
         {
+
             public override void Awake(TimerComponent self)
             {
                 TimerComponent.Instance = self;

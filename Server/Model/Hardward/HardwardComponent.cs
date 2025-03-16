@@ -13,6 +13,10 @@ namespace ET
     [ComponentOf(typeof(Scene))]
     public class HardwardComponent:Entity,IAwake,IDestroy
     {
+        /// <summary>
+        /// 隔多久更新一次
+        /// </summary>
+        public float m_fUpdateTime;
         public Computer m_Computer;
     }
 }

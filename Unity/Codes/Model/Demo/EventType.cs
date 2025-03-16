@@ -53,6 +53,9 @@ namespace ET
             public long Ping;
         }
         
+        /// <summary>
+        /// 给unity层的逻辑的消息 不知道为什么两个层之间隔离了
+        /// </summary>
         public struct AfterCreateZoneScene
         {
             public Scene ZoneScene;

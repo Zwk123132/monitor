@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using LibreHardwareMonitor.Hardware;
@@ -16,6 +18,7 @@ namespace ET
             Console.WriteLine("硬件初始化完成");
             self.m_Computer = self.NormalSetting();
             self.m_Computer.Open();
+            MessageHelper.SendActor()
 
         }
     }

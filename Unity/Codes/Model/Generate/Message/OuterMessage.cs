@@ -3,6 +3,15 @@ using ProtoBuf;
 using System.Collections.Generic;
 namespace ET
 {
+	[Message(OuterOpcode.M2C_FPSChange)]
+	[ProtoContract]
+	public partial class M2C_FPSChange: Object, IActorMessage
+	{
+		[ProtoMember(1)]
+		public int nNewFPS { get; set; }
+
+	}
+
 	[ResponseType(nameof(M2C_TestResponse))]
 	[Message(OuterOpcode.C2M_TestRequest)]
 	[ProtoContract]

@@ -8,7 +8,9 @@ namespace ET
         public static async ETTask Login(Scene zoneScene, string address, string account, string password)
         {
             try
+
             {
+                Log.Warning(zoneScene.Name);
                 // 创建一个ETModel层的Session
                 R2C_Login r2CLogin;
                 Session session = null;

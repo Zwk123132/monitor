@@ -3,6 +3,8 @@ using System.Threading;
 using CommandLine;
 using NLog;
 
+
+
 namespace ET
 {
 	internal static class Program
@@ -45,7 +47,7 @@ namespace ET
 				{
 					try
 					{
-						Thread.Sleep(1);
+						Thread.Sleep(30);
 						Game.Update();
 						Game.LateUpdate();
 						Game.FrameFinish();

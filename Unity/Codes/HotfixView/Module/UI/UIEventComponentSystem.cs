@@ -7,13 +7,13 @@ namespace ET
 	[ObjectSystem]
 	public class UIEventComponentAwakeSystem : AwakeSystem<UIEventComponent>
 	{
+
 		public override void Awake(UIEventComponent self)
 		{
 			UIEventComponent.Instance = self;
 			
 			GameObject uiRoot = GameObject.Find("/Global/UI");
 			ReferenceCollector referenceCollector = uiRoot.GetComponent<ReferenceCollector>();
-			
 			self.UILayers.Add((int)UILayer.Hidden, referenceCollector.Get<GameObject>(UILayer.Hidden.ToString()).transform);
 			self.UILayers.Add((int)UILayer.Low, referenceCollector.Get<GameObject>(UILayer.Low.ToString()).transform);
 			self.UILayers.Add((int)UILayer.Mid, referenceCollector.Get<GameObject>(UILayer.Mid.ToString()).transform);
