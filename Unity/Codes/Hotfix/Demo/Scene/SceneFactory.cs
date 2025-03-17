@@ -10,8 +10,7 @@ namespace ET
             zoneScene.AddComponent<NetKcpComponent, int>(SessionStreamDispatcherType.SessionStreamDispatcherClientOuter);
             Log.Debug("创建HardwareComponen组件");
             zoneScene.AddComponent<HardwareComponent>();
-			//zoneScene.AddComponent<CurrentScenesComponent>();
-            //给unity耦合层发送的消息
+            //发送ZoneSscene创建完成消息
             Game.EventSystem.Publish(new EventType.AfterCreateZoneScene() {ZoneScene = zoneScene});
             return zoneScene;
         }

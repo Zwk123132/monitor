@@ -26,6 +26,11 @@ namespace ET
             throw new NotImplementedException();
         }
 
+        public override void OnLoadResources(UIHardwardComponent self, GameObject LayerGameobject)
+        {
+            throw new NotImplementedException();
+        }
+
         public override void OnShowWindows(UIHardwardComponent self)
         {
             throw new NotImplementedException();
