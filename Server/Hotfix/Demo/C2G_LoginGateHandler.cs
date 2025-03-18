@@ -23,6 +23,7 @@ namespace ET
 
 			PlayerComponent playerComponent = scene.GetComponent<PlayerComponent>();
 			Player player = playerComponent.AddChild<Player, string>(account);
+            Console.WriteLine($"玩家名字{account}");
 			playerComponent.Add(player);
 			session.AddComponent<SessionPlayerComponent>().PlayerId = player.Id;
 			session.AddComponent<MailBoxComponent, MailboxType>(MailboxType.GateSession);

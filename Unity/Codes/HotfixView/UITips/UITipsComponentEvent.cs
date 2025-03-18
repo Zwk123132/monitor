@@ -9,37 +9,35 @@ using UnityEngine.UI;
 
 namespace ET
 {
-    [UIComponentAttribute(nameof(UITpisComponent))]
-    public class UITipsComponentEvent : UIComponentBase<UITpisComponent>
+    [FriendClass(typeof(UITipsComponent))]
+    [UIComponentAttribute(nameof(UITipsComponent))]
+    public class UITipsComponentEvent : UIComponentBase<UITipsComponent>
     {
         public override void CreateComponent(UIManagerComponent self)
         {
-            Log.Debug("创建了tips组件");
-            self.AddComponent<UITpisComponent>();
+            self.AddComponent<UITipsComponent>();
         }
 
-        public override void OnDestroyWindows(UITpisComponent self)
+        public override void OnDestroyWindows(UITipsComponent self)
         {
             
         }
 
-        public override void OnHideWindows(UITpisComponent self)
+        public override void OnHideWindows(UITipsComponent self)
         {
-            Log.Debug("隐藏了");
+
         }
 
 
-        public override void OnLoadResources(UITpisComponent self, GameObject LayerGameobject)
+        public override void OnLoadResources(UITipsComponent self, GameObject LayerGameobject)
         {
-            Log.Debug("加载开始");
             self.m_objWindow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("dlg/dlg_UITips"),LayerGameobject.transform);
-            self.m_objWindow.name = nameof(UITpisComponent);
+            self.m_objWindow.name = nameof(UITipsComponent);
             self.m_TextTitle = UITools.FindChildComponent<Text>(self.m_objWindow, "Title");
             UITools.FindChildComponent<Button>(self.m_objWindow, "BackButton").onClick.AddListenerAsync(self.OnBack);
-            Log.Debug("加载完成");
         }
 
-        public override void OnShowWindows(UITpisComponent self)
+        public override void OnShowWindows(UITipsComponent self)
         {
             self.m_TextTitle.text = self.m_szText;
         }

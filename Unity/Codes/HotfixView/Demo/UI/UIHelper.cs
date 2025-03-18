@@ -38,22 +38,21 @@ namespace ET
         {
             if (UIManagerComponent.Instance==null)
             {
-                throw new System.Exception("UIManagerComponent.Instance为空！UImanagerComponent为创建!");
+                throw new Exception("UIManagerComponent.Instance为空！UImanagerComponent未创建!");
             }
-            self.AddListener(() => {
-                Log.Debug("点击按钮");
-                if (!UIManagerComponent.Instance.isLock(self))
+            async ETTask clickActionAsync()
+            {
+                if (UIManagerComponent.Instance.isLock(self))
                 {
                     Log.Warning("重复点击一个被锁定的按钮");
                     return;
                 }
-
-
-                Log.Debug("没被锁定");
-                Lock(self);
-                etTask().Coroutine();
-                UnLock(self);
-
+                UIManagerComponent.Instance.SetLock(self);
+                await etTask();
+                UIManagerComponent.Instance.SetUnLock(self);
+            }
+            self.AddListener(() => {
+                clickActionAsync().Coroutine();
 
             });
         }

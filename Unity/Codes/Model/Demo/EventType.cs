@@ -75,7 +75,10 @@ namespace ET
         {
             public Scene ZoneScene;
         }
-
+        public struct AppStartInitFinishAsync
+        {
+            public Scene ZoneScene;
+        }
         public struct LoginFinish
         {
             public Scene ZoneScene;

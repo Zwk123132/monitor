@@ -19,7 +19,6 @@ namespace ET
             try
             {
                 UIManagerComponent.Instance = self;
-                Log.Debug("UIManager启动!!!!!!!!");
                 self.m_dictName2Gameobject = new Dictionary<string, GameObject>();
                 self.m_dictAsyncLock = new Dictionary<ButtonClickedEvent, bool>();
                 self.m_dictUILayer = new Dictionary<EUILayer, GameObject>();
@@ -31,7 +30,7 @@ namespace ET
                     object[] cas = item.GetCustomAttributes(typeof(global::UIComponentAttribute),false);
                     if (cas.Length == 0)
                     {
-                        throw new NullReferenceException("没有继承特性UIComponentAttribute");
+                        throw new Exception ("没有继承特性UIComponentAttribute");
                     }
                     self.m_DictChild.Add((cas[0] as UIComponentAttribute).szName, uie);
                 }
@@ -39,25 +38,22 @@ namespace ET
                 GameObject pobjUI = GameObject.Find("/Global/UI");
                 if (pobjUI == null)
                 {
-                    throw new NullReferenceException("没有在场景中找到/Global/UI！");
+                    throw new Exception("没有在场景中找到/Global/UI！");
                 }
                 for (int i = 0; i < pobjUI.transform.childCount; i++)
                 {
                     if (pobjUI.transform.GetChild(i).name != ((EUILayer)i).ToString())
                     {
-                        throw new NullReferenceException("没有在场景中找到/Global/UI" + "/" + ((EUILayer)i).ToString());
+                        throw new Exception("没有在场景中找到/Global/UI" + "/" + ((EUILayer)i).ToString());
                     }
                     self.m_dictUILayer.Add((EUILayer)i, pobjUI.transform.GetChild(i).gameObject);
                 }
-                foreach (var item in self.m_dictUILayer.Values)
-                {
-                    Log.Debug(item.name);
-                }
+
 
             }
             catch (Exception ex)
             {
-                Log.Warning(ex.ToString());
+                Log.Debug(ex.ToString());
                 throw;
             }
 
@@ -69,6 +65,8 @@ namespace ET
         {
             foreach (var item in self.m_DictChild.Values)
             {
+                //如果留着这里会报错 有时间看看
+                Log.Warning("如果留着这里会报错 有时间看看");
                 item.DestroyWindows(self);
             }
         }
@@ -82,7 +80,7 @@ namespace ET
             IUIEvent uie = null;
             if (!self.m_DictChild.TryGetValue(szName,out uie))
             {
-                throw new NullReferenceException($"{szName}不在UIManager的字典里");
+                throw new Exception($"{szName}不在UIManager的字典里");
             }
             GameObject pChild = null;
             if (self.m_dictName2Gameobject.ContainsKey(szName))
@@ -92,7 +90,6 @@ namespace ET
             else
             {
                 uie.LoadResources(self, self.m_dictUILayer[pEUILayer]);
-                Log.Warning("到这里没问题");
                 pChild = UITools.FindChild(GameObject.Find("/Global/UI"), szName);
                 if (pChild == null)
                 {
@@ -119,11 +116,7 @@ namespace ET
         }
         public static void SetLock(this UIManagerComponent self, ButtonClickedEvent pButtonClickedEvent)
         {
-            if (false == self.m_dictAsyncLock.TryGetValue(pButtonClickedEvent,out bool lockState))
-            {
-                self.m_dictAsyncLock.Add(pButtonClickedEvent, true);
-            }
-            else
+            if (self.m_dictAsyncLock.ContainsKey(pButtonClickedEvent))
             {
                 if (isLock(self, pButtonClickedEvent))
                 {
@@ -131,17 +124,17 @@ namespace ET
                 }
                 self.m_dictAsyncLock[pButtonClickedEvent] = true;
             }
-
-
+            else
+            {
+                self.m_dictAsyncLock.Add(pButtonClickedEvent, true);
+            }
         }
         public static bool isLock(this UIManagerComponent self, ButtonClickedEvent pButtonClickedEvent)
         {
             if (false==self.m_dictAsyncLock.ContainsKey(pButtonClickedEvent))
             {
-                Log.Debug("没有所以没被锁定");
                 return false;
             }
-
             return self.m_dictAsyncLock[pButtonClickedEvent];
         }
         public static void SetUnLock(this UIManagerComponent self, ButtonClickedEvent pButtonClickedEvent)

@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace ET
 {
-    public class UITipsComponent_Awake : AwakeSystem<UITpisComponent>
+    public class UITipsComponent_Awake : AwakeSystem<UITipsComponent>
     {
-        public override void Awake(UITpisComponent self)
+        public override void Awake(UITipsComponent self)
         {
-            UITpisComponent.Instance = self;
+            UITipsComponent.Instance = self;
             self.m_TextTitle = null;
         }
     }
-    public class UITpisComponent_Destroy : DestroySystem<UITpisComponent>
+    public class UITipsComponent_Destroy : DestroySystem<UITipsComponent>
     {
-        public override void Destroy(UITpisComponent self)
+        public override void Destroy(UITipsComponent self)
         {
             self.m_TextTitle = null;
         }
@@ -24,20 +24,19 @@ namespace ET
 
     public static class UITipsComponentSystem
     {
-        public static void Tips(this UITpisComponent self, string szTitle)
+        public static void Tips(this UITipsComponent self, string szTitle)
         {
 
             self.m_szText = szTitle;
-            UIManagerComponent.Instance.ShowWindows(nameof(UITpisComponent), EUILayer.Tips);
+            UIManagerComponent.Instance.ShowWindows(nameof(UITipsComponent), EUILayer.Tips);
 
             
         }
-        public static async ETTask OnBack(this UITpisComponent self)
+        public static async ETTask OnBack(this UITipsComponent self)
         {
+            UIManagerComponent.Instance.HideWindows(nameof(UITipsComponent));
+            await ETTask.CompletedTask;
 
-            await TimerComponent.Instance.WaitAsync(2000);
-            Log.Warning("测试完后记得移除");
-            UIManagerComponent.Instance.HideWindows(nameof(UITpisComponent));
         }
     }
 }

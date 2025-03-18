@@ -9,11 +9,11 @@ using UnityEngine.UI;
 namespace ET
 {
     [ComponentOf(typeof(UIManagerComponent))]
-    public class UITpisComponent:Entity,IAwake,IDestroy
+    public class UITipsComponent:Entity,IAwake,IDestroy
     {
         public Text m_TextTitle;
         public GameObject m_objWindow;
-        public static UITpisComponent Instance;
+        public static UITipsComponent Instance;
 
         public string m_szText;
     }
