@@ -29,6 +29,7 @@ namespace ET
             G2C_LoginGate pG2C_LoginGate = (G2C_LoginGate)await pZoneScene.GetComponent<SessionComponent>().Session.Call(new C2G_LoginGate() { Key = pR2C_Login.Key, GateId = pR2C_Login.GateId });
             if (pG2C_LoginGate.Error == ErrorCode.ERR_Success)
             {
+                pZoneScene.GetComponent<PlayerComponent>().MyId = pG2C_LoginGate.PlayerId;
                 Game.EventSystem.Publish<LoginGateFinish>(new LoginGateFinish() { ZoneScene = pZoneScene });
             }
             else
