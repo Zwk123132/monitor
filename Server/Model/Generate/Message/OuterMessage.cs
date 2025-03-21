@@ -12,6 +12,39 @@ namespace ET
 
 	}
 
+	[Message(OuterOpcode.ShowETNode)]
+	[ProtoContract]
+	public partial class ShowETNode: Object
+	{
+		[ProtoMember(1)]
+		public string TypeName { get; set; }
+
+		[ProtoMember(2)]
+		public string Name { get; set; }
+
+		[ProtoMember(3)]
+		public List<ShowETNode> Childs = new List<ShowETNode>();
+
+		[ProtoMember(4)]
+		public List<ShowETNode> ChildComponent = new List<ShowETNode>();
+
+		[ProtoMember(5)]
+		public string Omake { get; set; }
+
+		[ProtoMember(6)]
+		public bool IsScene { get; set; }
+
+	}
+
+	[Message(OuterOpcode.G2C_TreeNode)]
+	[ProtoContract]
+	public partial class G2C_TreeNode: Object, IMessage
+	{
+		[ProtoMember(1)]
+		public ShowETNode RootETNode { get; set; }
+
+	}
+
 	[ResponseType(nameof(M2C_TestResponse))]
 	[Message(OuterOpcode.C2M_TestRequest)]
 	[ProtoContract]

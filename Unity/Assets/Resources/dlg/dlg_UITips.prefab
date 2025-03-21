@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3777664931696160308}
   - component: {fileID: 1412809628846169870}
   - component: {fileID: 7903355525297572598}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 1644829843610208273}
   - component: {fileID: 9024625500950666950}
   - component: {fileID: 1558538518521741731}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 7803458041578615187}
   - component: {fileID: 6124912427395190932}
   - component: {fileID: 8981687019566322479}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 4752811861376811008}
   - component: {fileID: 5957846129588016789}
   - component: {fileID: 5625470857329428210}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 5847925960036705104}
   - component: {fileID: 2687006399118595404}
   - component: {fileID: 8727435794693666701}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: dlg_UITips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 4177692169514969057}
   - component: {fileID: 1313319002309036446}
   - component: {fileID: 5319670707827069798}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}

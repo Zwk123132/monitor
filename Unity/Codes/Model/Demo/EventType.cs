@@ -47,6 +47,13 @@ namespace ET
             }
         }
 
+
+        public struct LoginGateFinish
+        {
+            public Scene ZoneScene;
+        }
+
+
         public struct PingChange
         {
             public Scene ZoneScene;

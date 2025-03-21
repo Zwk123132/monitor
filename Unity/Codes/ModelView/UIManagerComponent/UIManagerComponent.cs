@@ -21,12 +21,27 @@ namespace ET
     [ComponentOf(typeof(Scene))]
     public class UIManagerComponent:Entity,IAwake,IDestroy
     {
-
+        /// <summary>
+        /// 为按钮提供异步锁
+        /// </summary>
         public Dictionary<Button.ButtonClickedEvent, bool> m_dictAsyncLock;
         public static UIManagerComponent Instance;
+        /// <summary>
+        /// 由界面的名字得到 接口 直接操作接口就可以
+        /// </summary>
         public Dictionary<string, IUIEvent> m_DictChild;
+        /// <summary>
+        /// 由golde/ui/层级得到对应的gameobject
+        /// </summary>
         public Dictionary<EUILayer, GameObject> m_dictUILayer;
+        /// <summary>
+        /// 子界面名字到对应的gameobj
+        /// </summary>
         public Dictionary<string, GameObject> m_dictName2Gameobject;
+        /// <summary>
+        /// 帮子界面Hold住物体 用string来加载
+        /// </summary>
+        public Dictionary<string, GameObject> m_HoldGameobjcet;
     }
     public enum EUILayer
     {
@@ -42,10 +57,31 @@ namespace ET
 
     public interface IUIEvent
     {
+        /// <summary>
+        /// 在uiManager Awake中调用 用于子界面加入到uimanager的子组件
+        /// </summary>
+        /// <param name="self"></param>
         void CreateComponent(UIManagerComponent self);
+        /// <summary>
+        /// 隐藏
+        /// </summary>
+        /// <param name="self"></param>
         void HideWindows(UIManagerComponent self);
-        void ShowWindows(UIManagerComponent self);
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <param name="self"></param>
+        void ShowWindows(UIManagerComponent self,object parame);
+        /// <summary>
+        /// 销毁
+        /// </summary>
+        /// <param name="self"></param>
         void DestroyWindows(UIManagerComponent self);
+        /// <summary>
+        /// 显示时发现没有加载资源则调用
+        /// </summary>
+        /// <param name="self"></param>
+        /// <param name="LayerGameobject"></param>
         void LoadResources(UIManagerComponent self,GameObject LayerGameobject);
     }
     public abstract class UIComponentBase<T> :IUIEvent where T:Entity
@@ -79,16 +115,16 @@ namespace ET
         }
         public abstract void OnHideWindows(T self);
 
-        public void ShowWindows(UIManagerComponent self)
+        public void ShowWindows(UIManagerComponent self,object parame)
         {
             T t = self.GetComponent<T>();
             if (t == null)
             {
                 throw new NullReferenceException($"UIManagerComponent下没有挂载{t.ToString()} ");
             }
-            OnShowWindows(t);
+            OnShowWindows(t,parame);
         }
-        public abstract void OnShowWindows(T self);
+        public abstract void OnShowWindows(T self, object parame);
 
         public void LoadResources(UIManagerComponent self,GameObject LayerGameobject)
         {

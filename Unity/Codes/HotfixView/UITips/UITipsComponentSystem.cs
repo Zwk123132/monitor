@@ -22,6 +22,7 @@ namespace ET
         }
     }
 
+    [FriendClass(typeof(UITipsComponent))]
     public static class UITipsComponentSystem
     {
         public static void Tips(this UITipsComponent self, string szTitle)

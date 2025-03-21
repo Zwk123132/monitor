@@ -5,6 +5,7 @@
         // 场景切换协程
         public static async ETTask SceneChangeTo(Scene zoneScene, string sceneName, long sceneInstanceId)
         {
+            //原来的场景
             zoneScene.RemoveComponent<AIComponent>();
             
             CurrentScenesComponent currentScenesComponent = zoneScene.GetComponent<CurrentScenesComponent>();

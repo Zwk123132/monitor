@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 
 namespace ET
@@ -18,17 +19,33 @@ namespace ET
 				reply();
 				return;
 			}
-			
+
+
 			session.RemoveComponent<SessionAcceptTimeoutComponent>();
 
 			PlayerComponent playerComponent = scene.GetComponent<PlayerComponent>();
+
+			foreach (Player item in playerComponent.Children.Values)
+			{
+				if (item.Account==account)
+				{
+					session.Send(new G2C_TreeNode() {RootETNode=ETHelper.ToETNode(Game.Scene) });
+					response.Error = ErrorCode.ERR_SystemError;
+					response.Message = $"已存在玩家{account}";
+					reply();
+					return;
+				}
+			}
+
 			Player player = playerComponent.AddChild<Player, string>(account);
             Console.WriteLine($"玩家名字{account}");
 			playerComponent.Add(player);
 			session.AddComponent<SessionPlayerComponent>().PlayerId = player.Id;
 			session.AddComponent<MailBoxComponent, MailboxType>(MailboxType.GateSession);
+            var nodes = ETHelper.ToETNode(Game.Scene);
+            Console.WriteLine(nodes.ToString());
 
-			response.PlayerId = player.Id;
+            response.PlayerId = player.Id;
 			reply();
 			await ETTask.CompletedTask;
 		}

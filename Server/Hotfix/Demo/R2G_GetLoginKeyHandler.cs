@@ -9,6 +9,7 @@ namespace ET
 		protected override async ETTask Run(Scene scene, R2G_GetLoginKey request, G2R_GetLoginKey response, Action reply)
 		{
 			long key = RandomHelper.RandInt64();
+            Console.WriteLine($"这里的场景是{scene.Name}");
 			scene.GetComponent<GateSessionKeyComponent>().Add(key, request.Account);
 			response.Key = key;
 			response.GateId = scene.Id;

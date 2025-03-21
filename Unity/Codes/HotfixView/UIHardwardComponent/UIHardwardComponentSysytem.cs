@@ -18,7 +18,7 @@ namespace ET
 
         public override void OnDestroyWindows(UIHardwardComponent self)
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void OnHideWindows(UIHardwardComponent self)
@@ -31,7 +31,8 @@ namespace ET
             throw new NotImplementedException();
         }
 
-        public override void OnShowWindows(UIHardwardComponent self)
+
+        public override void OnShowWindows(UIHardwardComponent self, object parame)
         {
             throw new NotImplementedException();
         }

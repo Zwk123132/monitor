@@ -19,6 +19,7 @@ namespace ET
             try
             {
                 UIManagerComponent.Instance = self;
+                self.m_HoldGameobjcet = new Dictionary<string, GameObject>();
                 self.m_dictName2Gameobject = new Dictionary<string, GameObject>();
                 self.m_dictAsyncLock = new Dictionary<ButtonClickedEvent, bool>();
                 self.m_dictUILayer = new Dictionary<EUILayer, GameObject>();
@@ -72,10 +73,36 @@ namespace ET
         }
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     [FriendClass(typeof(UIManagerComponent))]
     public  static class UIManagerComponentSystem 
     {
-        public static void ShowWindows(this UIManagerComponent self, string szName,EUILayer pEUILayer)
+        public static void ShowWindows(this UIManagerComponent self, string szName, object parame=null, EUILayer pEUILayer=EUILayer.High)
         {
             IUIEvent uie = null;
             if (!self.m_DictChild.TryGetValue(szName,out uie))
@@ -97,7 +124,7 @@ namespace ET
                 }
                 self.m_dictName2Gameobject.Add(szName, pChild);
             }
-            uie.ShowWindows(self);
+            uie.ShowWindows(self,parame);
             pChild.SetActive(true);
         }
         public static void HideWindows(this UIManagerComponent self,string szName)
@@ -160,6 +187,22 @@ namespace ET
             self.m_dictName2Gameobject.Remove(szName);
             self.m_DictChild.Remove(szName);
             uie.DestroyWindows(self);
+        }
+        public static void HoleGameobject(this UIManagerComponent self,string szName,GameObject gameObject)
+        {
+            if (self.m_HoldGameobjcet.ContainsKey(szName))
+            {
+                throw new Exception($"hold字典里已经有了同名物体{szName}");
+            }
+            self.m_HoldGameobjcet.Add(szName, gameObject);
+        }
+        public static GameObject GetHoleGameobject(this UIManagerComponent self, string szName)
+        {
+            if (false ==self.m_HoldGameobjcet.TryGetValue(szName, out GameObject obj))
+            {
+                throw new Exception($"HOld字典里没有{szName}");
+            }
+            return obj;
         }
     }
 }

@@ -19,6 +19,7 @@ namespace ET
     {
         public static async ETTask EnterMap(this UILobbyComponent self)
         {
+            Log.Debug("原版进入map开始");
             await EnterMapHelper.EnterMapAsync(self.ZoneScene());
             await UIHelper.Remove(self.ZoneScene(), UIType.UILobby);
         }

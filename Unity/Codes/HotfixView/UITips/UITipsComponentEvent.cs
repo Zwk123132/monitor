@@ -37,7 +37,8 @@ namespace ET
             UITools.FindChildComponent<Button>(self.m_objWindow, "BackButton").onClick.AddListenerAsync(self.OnBack);
         }
 
-        public override void OnShowWindows(UITipsComponent self)
+
+        public override void OnShowWindows(UITipsComponent self, object parame)
         {
             self.m_TextTitle.text = self.m_szText;
         }

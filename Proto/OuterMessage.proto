@@ -1,10 +1,37 @@
 syntax = "proto3";
 package ET;
 
+
+message C2G_heartbeat //IMessage
+{
+	int64 lTime = 1;
+}
+
 message M2C_FPSChange // IActorMessage
 {
 	int32 nNewFPS = 1;
 }
+
+message ShowETNode
+{
+	string TypeName = 1;
+	string Name = 2;
+	repeated ShowETNode Childs = 3;
+	repeated ShowETNode ChildComponent = 4;
+	string Omake = 5;
+	bool IsScene = 6;
+}
+
+
+
+message G2C_TreeNode //IMessage
+{
+	ShowETNode RootETNode = 1;
+}
+
+
+
+
 
 
 //ResponseType M2C_TestResponse

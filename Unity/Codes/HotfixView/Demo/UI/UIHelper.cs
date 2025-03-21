@@ -51,6 +51,7 @@ namespace ET
                 await etTask();
                 UIManagerComponent.Instance.SetUnLock(self);
             }
+  
             self.AddListener(() => {
                 clickActionAsync().Coroutine();
 
